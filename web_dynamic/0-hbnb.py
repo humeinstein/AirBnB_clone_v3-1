@@ -9,8 +9,8 @@ from uuid import uuid4, UUID
 # flask setup
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-#was port 5000 ------------------------> potential check threat
-port = 5001
+# default port: 5000; may need to switch port to 5001
+port = 5000
 host = '0.0.0.0'
 
 
