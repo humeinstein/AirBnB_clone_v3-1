@@ -93,6 +93,12 @@
 	margin: 5px 0 5px 0;
 }
 
+
+input[type="checkbox"] {
+    float: left;
+    margin-right: 10px !important; 
+}
+
 @media screen and (max-width: 600px) {
 
 	.container .filters {
