@@ -12,9 +12,8 @@ $(document).ready(function () {
       }
     }
   }
-// Appends the list contents as list elements in amenities 
+  // Appends the list contents as list elements in amenities
   for (let i = 0; i < idList.length; i++) {
-    const amenityID = idList[i];
-    $('#h4'.find('.amenities')).append('<li> + amenityID + </li>');
+    $('#h4').find('.amenities').append('<li> + idList[i] + </li>');
   }
 });
