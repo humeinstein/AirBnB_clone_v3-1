@@ -1,24 +1,28 @@
-/* If amenity checkbox is checked, saves id to list
-   Else deletes id from list
-*/
 $(document).ready(function () {
-  let dataDict = {};
   console.log("#### SCRIPT LOADED ####");
-  $('input[type="checkbox"]').on('click', function () {
-    console.log("#### CLICKED ####");
-    $('input[type="checkbox"]:checked').each(function () {
-      dataDict[$(this).attr("data-id")] = $(this).attr("data-name");
-      console.log(dataDict);
-    });
+  let dataDict = {};
+  /* detects if ANY checkbox on the page is changed
+     May be necessary to narrow this scope to a
+     more specific div or class
+  */
+  $('input[type="checkbox"]').on('change', function () {
+    if (this.checked) {
+      console.log('#### Box checked! ####');
+
+      // add key/value to dict if id not already in it
+      if (!($(this).attr("data-id") in dataDict)) {
+	dataDict[$(this).attr("data-id")] = $(this).attr("data-name");
+      }
+    } else {
+      console.log('#### Box UNchecked! ####');
+
+      // remove key/value from dict if id is a duplicate
+      delete dataDict[$(this).attr("data-id")];
+      delete dataDict[$(this).attr("data-name")];
+    }
+
+    // appends dict values as stringified list to html
+    $('.amenities').find('h4').text('');
+    $('.amenities').find('h4').append(Object.values(dataDict).join(', '));
   });
 });
-
-//     for (let i = idList.length - 1; i >= 0; i--) {
-//       if (idList[i] === $('amenity.id')) {
-//         idList.splice(i, 1);
-//       }
-//     }
-//   });
-//   // Appends the list contents as list elements in amenities
-//   $('.amenities').find('h4').append(idList.join(', '));
-// });
