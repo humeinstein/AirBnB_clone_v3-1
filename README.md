@@ -170,14 +170,22 @@ HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_test_db HBNB_TYPE_STORAGE=db \
 #### Check the console
 ```
 "#### SCRIPT LOADED ####" -> means the page has successfully incorporated present jquery scripts
-"#### BOX CHECKED ####" -> confirms the checkbox being filled is read properly.
-"#### BOX UNCHECKED ####" -> confirms the checkbox is unfilled and read properly.
-"#### API OK  ####" -> connection to api is working.
-"#### API NOT OK ####" -> connection to api is not working.
-"#### POST SUCCESS ####" -> post request was successful.
-"#### DATA ####" -> data is readable
-"#### Error, status = ' + textStatus + ', ' + 'error thrown: ' + errorThrown ####" -> shows error and supporting information
-"#### Peeling JSON onion ####" -> able to read json data to be used for html render
+"#### BOX CHECKED ####" 
+      -> confirms the checkbox being filled is read properly.
+"#### BOX UNCHECKED ####" 
+      -> confirms the checkbox is unfilled and read properly.
+"#### API OK  ####" 
+      -> connection to api is working.
+"#### API NOT OK ####" 
+      -> connection to api is not working.
+"#### POST SUCCESS ####" 
+      -> post request was successful.
+"#### DATA ####" 
+      -> data is readable
+"#### Error, status = ' + textStatus + ', ' + 'error thrown: ' + errorThrown ####" 
+      -> shows error and supporting information
+"#### Peeling JSON onion ####" 
+      -> able to read json data to be used for html render
 ```
 
 #### For a detailed description of all tests, run these commands in the CLI:
