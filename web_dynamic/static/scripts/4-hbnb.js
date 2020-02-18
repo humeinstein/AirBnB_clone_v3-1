@@ -45,31 +45,70 @@ $(document).ready(function () {
 
   // POST request to api/v1/places_search/ endpoint
   const posting = $.ajax({
-    type: "POST",
+    type: 'POST',
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
     data: '{}',
     dataType: 'json',
     contentType: 'application/json',
-    success: function(data) {
+    success: function (data) {
       console.log('#### POST Success! ####');
       console.log('#### Data ####');
       console.log(data);
     },
-    error: function(jqXHR, textStatus, errorThrown) {
-      console.log("Error, status = " + textStatus + ", " + "error thrown: " + errorThrown
-		 );
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log('Error, status = ' + textStatus + ', ' + 'error thrown: ' + errorThrown
+      );
     }
   });
+
+  // appending data from POST query to html page
+  posting.done(function (data) {
+    console.log('#### Peeling JSON onion ####');
+
+    // page element where html will be appended
+    const el = $('section.places');
+
+    // empty it to start fresh every time
+    el.empty();
+
+    el.append('<h1>Places</h1>');
+    $.each(data, function (i, place) {
+      el.append(
+        '<article>' +
+        '<div class="title">' +
+'<h2>' + place.name + '</h2>' +
+        '<div class="price_by_night">' +
+place.price_by_night +
+        '</div>' +
+        '</div>' +
+        '<div class="information">' +
+        '<div class="max_guest">' +
+        '<i class="fa fa-users fa-3x" aria-hidden="true"></i>' +
+        '<br />' +
+        place.max_guest + 'Guests' +
+        '</div>' +
+        '<div class="number_rooms">' +
+        '<i class="fa fa-bed fa-3x" aria-hidden="true"></i>' +
+'<br />' +
+        place.number_rooms + 'Bedrooms' +
+        '</div>' +
+        '<div class="number_bathrooms">' +
+        '<i class="fa fa-bath fa-3x" aria-hidden="true"></i>' +
+'<br />' +
+        place.number_bathrooms + 'Bathroom' +
+        '</div>' +
+        '</div>' +
+        '<div class="description">' +
+        place.description +
+        '</div>' +
+'</article>'
+      );
+    });
+  });
 });
-  // // appending data from POST query to html page
-  // posting.done(function(data) {
-  //   $('section.places').text('#### INSIDE PLACES SECTION ####');
-  //   console.log('#### Peeling JSON onion ####')
-  //   $.each(data, function (i, val) {
-  //     console.log(val);
-  //   });
-  // });
-  //   // $('section.places').append('<article>' + content + '</article>');
+
+
+
 function searchButton () {
     $('button').click(function () {
 	console.log("button clicked");
