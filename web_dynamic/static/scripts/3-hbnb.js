@@ -1,11 +1,8 @@
 $(document).ready(function () {
   console.log('#### SCRIPT LOADED ####');
   const dataDict = {};
-  /* detects if ANY checkbox on the page is changed
-     May be necessary to narrow this scope to a
-     more specific div or class
-  */
-  $('input[type="checkbox"]').on('change', function () {
+  //* detects if amenities checkbox is changed
+  $('.amenities input[type="checkbox"]').on('change', function () {
     if (this.checked) {
       console.log('#### Box checked! ####');
 
@@ -46,7 +43,7 @@ $(document).ready(function () {
     ####################################################
   */
 
-  // POST to api/v1/places_search/ endpoint, updates html
+  // POST request to api/v1/places_search/ endpoint
   const posting = $.ajax({
     type: "POST",
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
@@ -63,7 +60,13 @@ $(document).ready(function () {
 		 );
     }
   });
-  posting.done(function(data) {
-    $('.places').empty().append('<article>' + content + '</article>');
-  });
 });
+  // // appending data from POST query to html page
+  // posting.done(function(data) {
+  //   $('section.places').text('#### INSIDE PLACES SECTION ####');
+  //   console.log('#### Peeling JSON onion ####')
+  //   $.each(data, function (i, val) {
+  //     console.log(val);
+  //   });
+  // });
+  //   // $('section.places').append('<article>' + content + '</article>');
