@@ -64,11 +64,14 @@ $(document).ready(function () {
   // appending data from POST query to html page
   posting.done(function (data) {
     console.log('#### Peeling JSON onion ####');
-    // $('section.places').text('#### INSIDE PLACES SECTION ####');
+
     // page element where html will be appended
     const el = $('section.places');
+
     // empty it to start fresh every time
     el.empty();
+
+    el.append('<h1>Places</h1>');
     $.each(data, function (i, place) {
       el.append(
         '<article>' +
