@@ -167,6 +167,11 @@ $ HBNB_MYSQL_USER=hbnb_test HBNB_MYSQL_PWD=hbnb_test_pwd \
 HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_test_db HBNB_TYPE_STORAGE=db \
 ./console.py
 ```
+#### Check the console
+```
+"#### SCRIPT LOADED ####" -> means the page has successfully incorporated present jquery scripts
+
+
 
 #### For a detailed description of all tests, run these commands in the CLI:
 
