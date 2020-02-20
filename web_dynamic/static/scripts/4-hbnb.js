@@ -5,7 +5,7 @@ $(document).ready(function () {
   $('.amenities input[type="checkbox"]').on('change', function () {
     if (this.checked) {
       console.log('#### Box checked! ####');
-
+      console.log($(this).attr('data-name'));
       // add key/value to dict if id not already in it
       if (!($(this).attr('data-id') in dataDict)) {
         dataDict[$(this).attr('data-id')] = $(this).attr('data-name');
@@ -20,7 +20,7 @@ $(document).ready(function () {
 
     // appends dict values as stringified list to html
     $('.amenities').find('h4').text('');
-    $('.amenities').find('h4').append(Object.values(dataDict).join(', '));
+    $('.amenities').find('h4').text(Object.values(dataDict).join(', '));
   });
 
   /*
@@ -56,7 +56,7 @@ $(document).ready(function () {
  appending new HTML
 */
       const ajaxDict = {};
-      if (Object.keys(dataDict).length > 1) {
+      if (Object.keys(dataDict).length > 0) {
         ajaxDict.amenities = Object.keys(dataDict);
       }
       console.log('#### ajaxDict ####');
@@ -105,20 +105,20 @@ place.price_by_night +
               '<div class="max_guest">' +
               '<i class="fa fa-users fa-3x" aria-hidden="true"></i>' +
               '<br />' +
-              place.max_guest + 'Guests' +
+              place.max_guest + ' Guests' +
               '</div>' +
               '<div class="number_rooms">' +
               '<i class="fa fa-bed fa-3x" aria-hidden="true"></i>' +
 '<br />' +
-              place.number_rooms + 'Bedrooms' +
+              place.number_rooms + ' Bedrooms' +
               '</div>' +
               '<div class="number_bathrooms">' +
               '<i class="fa fa-bath fa-3x" aria-hidden="true"></i>' +
 '<br />' +
-              place.number_bathrooms + 'Bathroom' +
+              place.number_bathrooms + ' Bathrooms' +
               '</div>' +
               '</div>' +
-              '<div class="description">' +
+              '<div class="description">' + '<br />' +
               place.description +
               '</div>' +
 '</article>'
@@ -129,5 +129,74 @@ place.price_by_night +
   }
   $(window).on('load', function () {
     searchButton();
+    const ajaxDict = {};
+    if (Object.keys(dataDict).length > 0) {
+      ajaxDict.amenities = Object.keys(dataDict);
+    }
+    console.log('#### ajaxDict ####');
+    console.log(ajaxDict);
+
+    const posting = $.ajax({
+      async: false,
+      type: 'POST',
+      url: 'http://0.0.0.0:5001/api/v1/places_search/',
+      data: JSON.stringify(ajaxDict),
+      dataType: 'json',
+      contentType: 'application/json',
+      success: function (data) {
+        console.log('#### POST Success! ####');
+        console.log('#### Data ####');
+        console.log(data);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log('Error, status = ' + textStatus + ', ' + 'error thrown: ' + errorThrown
+        );
+      }
+    });
+
+    // appending data from POST query to html page
+    posting.done(function (data) {
+      console.log('#### Peeling JSON onion ####');
+
+      // page element where html will be appended
+      const el = $('section.places');
+
+      // empty it to start fresh every time
+      el.empty();
+
+      el.append('<h1>Places</h1>');
+
+      $.each(data, function (i, place) {
+        el.append(
+          '<article>' +
+              '<div class="title">' +
+'<h2>' + place.name + '</h2>' +
+              '<div class="price_by_night">' + '$' + place.price_by_night +
+              '</div>' +
+              '</div>' +
+              '<div class="information">' +
+              '<div class="max_guest">' +
+              '<i class="fa fa-users fa-3x" aria-hidden="true"></i>' +
+              '<br />' +
+              place.max_guest + ' Guests' +
+              '</div>' +
+              '<div class="number_rooms">' +
+              '<i class="fa fa-bed fa-3x" aria-hidden="true"></i>' +
+'<br />' +
+              place.number_rooms + ' Bedrooms' +
+              '</div>' +
+              '<div class="number_bathrooms">' +
+              '<i class="fa fa-bath fa-3x" aria-hidden="true"></i>' +
+'<br />' +
+              place.number_bathrooms + ' Bathrooms' +
+              '</div>' +
+              '</div>' +
+              '<div class="description">' + '<br />' +
+            place.description +
+              '</div>' +
+'</article>'
+        );
+      });
+    });
   });
 });

@@ -66,6 +66,21 @@
 	justify-content: center;
 }
 
+.information .max_guest {
+    background: url("../images/icon_group.png") no-repeat top center;
+    width: 100px;
+}
+
+.information .number_rooms {
+    background: url("../images/icon_bed.png") no-repeat top center;
+    width: 100px;
+}
+
+.information .number_bathrooms {
+    background: url("../images/icon_bath.png") no-repeat top center;
+    width: 100px;
+}
+
 .container .places .information .max_guest,
 .container .places .information .number_rooms,
 .container .places .information .number_bathrooms {
@@ -74,7 +89,7 @@
 	background-repeat: no-repeat;
 	background-position: center 5px;
 	text-align: center;
-	line-height: 25px;
+	line-height: 2.5;
 }
 
 .container .places .user {
